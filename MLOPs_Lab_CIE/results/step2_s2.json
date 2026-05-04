@@ -1,0 +1,11 @@
+{
+    "search_type": "random",
+    "n_folds": 5,
+    "total_trials": 5,
+    "best_params": {
+        "alpha": 0.001
+    },
+    "best_mae": 4.6113927608961545,
+    "best_cv_mae": 6.07358357090394,
+    "parent_run_name": "tuning-chemreact"
+}
