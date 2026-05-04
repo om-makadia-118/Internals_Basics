@@ -3,6 +3,7 @@ import json
 import random
 import numpy as np
 import pandas as pd
+import joblib
 
 from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.ensemble import GradientBoostingRegressor
@@ -124,11 +125,11 @@ with mlflow.start_run(run_name="tuning-chemreact"):
 
             cv_mae = -np.mean(cv_scores)
 
-            # Log
+            # Log params + metric
             mlflow.log_params(params)
             mlflow.log_metric("cv_mae", cv_mae)
 
-            # Best tracking
+            # Track best
             if cv_mae < best_cv_mae:
                 best_cv_mae = cv_mae
                 best_params = params
@@ -153,14 +154,23 @@ with mlflow.start_run(run_name="tuning-chemreact"):
     preds = best_model.predict(X_test)
     test_mae = mean_absolute_error(y_test, preds)
 
-    # Log best
+    # Log best results
     mlflow.log_params(best_params)
     mlflow.log_metric("best_cv_mae", best_cv_mae)
     mlflow.log_metric("test_mae", test_mae)
 
 
 # -----------------------------
-# 8. Save JSON
+# 8. Save Tuned Model
+# -----------------------------
+os.makedirs("models", exist_ok=True)
+
+model_path = os.path.join("models", "tuned_model.pkl")
+joblib.dump(best_model, model_path)
+
+
+# -----------------------------
+# 9. Save JSON Output
 # -----------------------------
 output = {
     "search_type": "random",
@@ -181,4 +191,5 @@ with open(output_path, "w") as f:
 print("Task 2 completed.")
 print("Best Model:", best_model_name)
 print("Best Params:", best_params)
+print("Tuned model saved at:", model_path)
 print("Results saved to:", output_path)

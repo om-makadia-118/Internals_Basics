@@ -1,0 +1,7 @@
+{
+    "registered_model_name": "chemreact-reaction-yield-pct-predictor",
+    "version": 1,
+    "run_id": "24df57f622d84ec4a0a29988ebea0b8b",
+    "source_metric": "mae",
+    "source_metric_value": 4.6113927608961545
+}
