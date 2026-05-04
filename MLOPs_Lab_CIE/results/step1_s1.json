@@ -1,0 +1,18 @@
+{
+    "experiment_name": "chemreact-reaction-yield-pct",
+    "models": [
+        {
+            "name": "Lasso",
+            "mae": 4.603349444359447,
+            "rmse": 6.323150211093422
+        },
+        {
+            "name": "GradientBoosting",
+            "mae": 5.650231392591903,
+            "rmse": 10.264503138158359
+        }
+    ],
+    "best_model": "Lasso",
+    "best_metric_name": "mae",
+    "best_metric_value": 4.603349444359447
+}
